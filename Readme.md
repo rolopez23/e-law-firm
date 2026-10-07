@@ -31,4 +31,16 @@ only by licensed lawyers through a scheduled consultation or reviewed document.
 
 ## Getting started
 
-_TBD — stack not yet chosen._
+Requires Node 20+, [uv](https://docs.astral.sh/uv/) and Docker.
+
+```bash
+npm run setup     # install frontend, backend and root deps; create .env files
+npm run db:up     # start Postgres
+npm run dev       # backend on :8000, frontend on :3000
+```
+
+Open http://localhost:3000. The status line should read
+"Backend: ok · Database: ok".
+
+Stack: Next.js frontend, FastAPI + Postgres backend. See [AGENTS.md](AGENTS.md)
+for details.

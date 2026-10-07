@@ -51,8 +51,29 @@ These are product requirements, not style preferences.
 
 ## Stack
 
-_TBD._ Record the chosen stack, commands (install, dev, test, lint) and
-directory layout here once decided.
+| Part | Tech | Dir | URL |
+|---|---|---|---|
+| Frontend | Next.js 16, React 19, TypeScript, Tailwind v4, Vitest | `frontend/` | http://localhost:3000 |
+| Backend | FastAPI, SQLAlchemy 2 (async), asyncpg, Alembic, pytest; uv, Python 3.12 | `backend/` | http://localhost:8000 (routes under `/api`) |
+| Database | Postgres 16 via `docker-compose.yml` (`app` + `app_test` DBs) | `docker/` | localhost:5432 |
+
+The frontend ↔ backend contract (ports, env vars, `/api/health` shape) lives in
+[docs/boot/contract.md](docs/boot/contract.md). Change it there first.
+
+Commands (repo root):
+
+| Task | Command |
+|---|---|
+| First-time setup | `npm run setup` |
+| Start Postgres | `npm run db:up` |
+| Run migrations | `npm run db:migrate` |
+| Run both apps | `npm run dev` |
+| All tests | `npm test` (backend integration tests skip if Postgres is down) |
+| Smoke check | `npm run smoke` (with `dev` running) |
+
+- Run Python only via `uv run …` inside `backend/`; do not add `.python-version`.
+- Backend: routers → services; no DB access in routers. Tests override `get_db`.
+- Frontend: App Router; backend base URL from `NEXT_PUBLIC_API_URL`.
 
 ---
 
