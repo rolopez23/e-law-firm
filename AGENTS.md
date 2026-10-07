@@ -77,6 +77,27 @@ Commands (repo root):
 
 ---
 
+## AI sessions
+
+`ai-sessions/` is gitignored and holds every artifact an AI session produces.
+
+- `ai-sessions/sessions.md` lists sessions under **In progress** and **Completed**: folder,
+  name/purpose, dates, and the `claude --resume <session-id>` command.
+- `ai-sessions/YYYY-MM-DD-<slug>/` is one folder per session for plans, specs, notes,
+  verify/review reports, friction logs and a `summary.md`. All Markdown.
+
+Rules for agents:
+
+1. At session start, add a row under **In progress** and create the session folder. Get
+   the session ID from the scratchpad path or `/status`.
+2. Write session artifacts to that folder, not to `docs/`, scratchpad or `/tmp`.
+3. At session end, update `summary.md` (goal, done, time sinks, open items) and move the
+   row to **Completed**.
+4. Exception: files the code or other contributors depend on stay committed in `docs/`
+   (e.g. [docs/boot/contract.md](docs/boot/contract.md)).
+
+---
+
 ## Workflow
 
 Follow the user-level workflow in `~/.claude/CLAUDE.md`

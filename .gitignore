@@ -19,3 +19,6 @@ __pycache__/
 *.tsbuildinfo
 next-env.d.ts
 .playwright-mcp/
+
+# AI session artifacts (plans, notes, logs); see AGENTS.md
+ai-sessions/
