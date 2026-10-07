@@ -79,20 +79,22 @@ Commands (repo root):
 
 ## AI sessions
 
-`ai-sessions/` is gitignored and holds every artifact an AI session produces.
+`ai-sessions/` is gitignored and holds every artifact AI sessions produce.
 
-- `ai-sessions/sessions.md` lists sessions under **In progress** and **Completed**: folder,
-  name/purpose, dates, and the `claude --resume <session-id>` command.
-- `ai-sessions/YYYY-MM-DD-<slug>/` is one folder per session for plans, specs, notes,
-  verify/review reports, friction logs and a `summary.md`. All Markdown.
+- `ai-sessions/YYYY-MM-DD-<feature>/` is one folder per feature or workstream: spec, plan,
+  steps, verify/review reports, friction logs, notes and a `summary.md`. All Markdown.
+  Ad-hoc work not tied to a feature gets its own dated folder.
+- `ai-sessions/sessions.md` lists those folders under **In progress** and **Completed**:
+  folder, name/purpose, dates, and every `claude --resume <session-id>` that worked on it.
 
 Rules for agents:
 
-1. At session start, add a row under **In progress** and create the session folder. Get
-   the session ID from the scratchpad path or `/status`.
-2. Write session artifacts to that folder, not to `docs/`, scratchpad or `/tmp`.
-3. At session end, update `summary.md` (goal, done, time sinks, open items) and move the
-   row to **Completed**.
+1. At session start, reuse the feature's folder (`ls -d ai-sessions/*-<feature>/`) and add
+   this session's resume command to its row; otherwise create the folder and an
+   **In progress** row. Session ID: scratchpad path or `/status`.
+2. Write artifacts to that folder, not to scratchpad or `/tmp`.
+3. At session end, update `summary.md` (goal, done, time sinks, open items). Move the row
+   to **Completed** only when the feature is done.
 4. Exception: files the code or other contributors depend on stay committed in `docs/`
    (e.g. [docs/boot/contract.md](docs/boot/contract.md)).
 
